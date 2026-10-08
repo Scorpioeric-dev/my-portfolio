@@ -47,6 +47,7 @@
       <!-- Nav -->
       <nav id="nav">
         <ul class="links">
+		  <li><a href="#ai-projects" class="scrolly">AI Projects</a></li>
           <li class="active"><a href="index.html">Introduction</a></li>
         </ul>
         <ul class="icons">
@@ -66,7 +67,368 @@
           </li>
         </ul>
       </nav>
+      <!--
+  AI & AUTOMATION PROJECTS — drop-in section
+  Paste this whole block into your index.html where you want it (above the old project tiles).
+  Self-contained: scoped CSS (.aip), no JavaScript, no external fonts or libraries.
+  If your contact section has a different id than "contact", update the link at the bottom.
+  All employer, system, vendor and volume details are intentionally generalized.
+-->
+<style>
+  .aip {
+    --aip-bg: #121a24;
+    --aip-surface: #19232f;
+    --aip-line: #2c3a4a;
+    --aip-text: #e8edf2;
+    --aip-muted: #a3b1c0;
+    --aip-accent: #6fd0bd;
+    --aip-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --aip-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--aip-bg);
+    color: var(--aip-text);
+    font-family: var(--aip-sans);
+    line-height: 1.6;
+    padding: 4.5rem 1.25rem;
+    box-sizing: border-box;
+  }
+  .aip *, .aip *::before, .aip *::after { box-sizing: border-box; }
+  .aip-inner { max-width: 62rem; margin: 0 auto; text-align: left; }
+  /* Reset for the Massively (HTML5 UP) template's global heading and link styles */
+  .aip h2, .aip h3, .aip dt { text-transform: none; letter-spacing: normal; border: 0; }
+  .aip p, .aip dd, .aip li { font-family: var(--aip-sans); letter-spacing: normal; text-transform: none; }
 
+  .aip h2 {
+    font-family: var(--aip-serif);
+    font-weight: 600;
+    font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0 0 1rem;
+    color: var(--aip-text);
+  }
+  .aip-lede { max-width: 40rem; font-size: 1.05rem; color: var(--aip-muted); margin: 0 0 2.5rem; }
+
+  .aip-principles {
+    list-style: none; margin: 0 0 3rem; padding: 0;
+    display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  }
+  .aip-principles li { border-left: 3px solid var(--aip-accent); padding: 0.1rem 0 0.1rem 1rem; }
+  .aip-principles strong { display: block; font-family: var(--aip-serif); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.2rem; }
+  .aip-principles span { color: var(--aip-muted); font-size: 0.95rem; }
+
+  .aip-project {
+    background: var(--aip-surface);
+    border: 1px solid var(--aip-line);
+    border-radius: 6px;
+    margin: 0 0 0.9rem;
+  }
+  .aip-project > summary {
+    list-style: none; cursor: pointer; padding: 1.25rem 3.25rem 1.25rem 1.4rem; position: relative;
+  }
+  .aip-project > summary::-webkit-details-marker { display: none; }
+  .aip-project > summary::after {
+    content: ""; position: absolute; right: 1.4rem; top: 1.7rem; width: 0.6rem; height: 0.6rem;
+    border-right: 2px solid var(--aip-muted); border-bottom: 2px solid var(--aip-muted);
+    transform: rotate(45deg); transition: transform 0.2s ease;
+  }
+  .aip-project[open] > summary::after { transform: rotate(-135deg); top: 1.95rem; }
+  .aip-project > summary:focus-visible { outline: 3px solid var(--aip-accent); outline-offset: 2px; border-radius: 6px; }
+  .aip-project > summary:hover .aip-title { color: var(--aip-accent); }
+
+  .aip-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 0.9rem; margin-bottom: 0.35rem; }
+  .aip-title { font-family: var(--aip-serif); font-size: 1.3rem; font-weight: 600; margin: 0; transition: color 0.15s ease; }
+  .aip-status {
+    font-size: 0.78rem; font-weight: 600; padding: 0.1rem 0.6rem; border-radius: 999px;
+    border: 1px solid var(--aip-accent); color: var(--aip-accent); white-space: nowrap;
+  }
+  .aip-status.is-planned { border-style: dashed; border-color: var(--aip-muted); color: var(--aip-muted); }
+  .aip-summary { margin: 0 0 0.8rem; color: var(--aip-text); max-width: 46rem; }
+  .aip-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0; padding: 0; list-style: none; }
+  .aip-tags li { font-size: 0.8rem; color: var(--aip-muted); background: rgba(255,255,255,0.05); padding: 0.1rem 0.55rem; border-radius: 4px; }
+
+  .aip-body { padding: 0.25rem 1.4rem 1.5rem; border-top: 1px solid var(--aip-line); }
+  .aip-body dl { margin: 1.2rem 0 0; display: grid; gap: 1.1rem 1.5rem; grid-template-columns: 9rem 1fr; }
+  .aip-body dt { font-family: var(--aip-serif); font-weight: 600; color: var(--aip-accent); }
+  .aip-body dd { margin: 0; max-width: 44rem; }
+  .aip-body dd ul { margin: 0; padding-left: 1.1rem; }
+  .aip-body dd li { margin-bottom: 0.4rem; }
+  @media (max-width: 640px) {
+    .aip-body dl { grid-template-columns: 1fr; gap: 0.3rem; }
+    .aip-body dd { margin-bottom: 0.9rem; }
+    .aip-project > summary { padding-right: 2.75rem; }
+  }
+
+  .aip-skills { margin: 2.5rem 0 0; max-width: 46rem; color: var(--aip-muted); }
+  .aip-skills strong { color: var(--aip-text); font-family: var(--aip-serif); }
+  .aip-cta { margin: 1.75rem 0 0; }
+  .aip-cta a {
+    display: inline-block; padding: 0.7rem 1.4rem; border-radius: 4px; font-weight: 600; text-decoration: none;
+    background: var(--aip-accent); color: #0d1a1f; border: 0;
+  }
+  .aip-cta a:hover { background: #8adccc; }
+  .aip-cta a:focus-visible { outline: 3px solid var(--aip-text); outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) {
+    .aip-project > summary::after, .aip-title { transition: none; }
+  }
+</style>
+
+<section class="aip" id="ai-projects" aria-labelledby="aip-heading">
+  <div class="aip-inner">
+
+    <h2 id="aip-heading">AI &amp; Automation Projects</h2>
+    <p class="aip-lede">
+      I design and build AI agents and production automation for operations teams. These projects come
+      from my day-to-day work, so company names, systems, and volumes are intentionally kept general.
+    </p>
+
+    <ul class="aip-principles">
+      <li>
+        <strong>Governance is a design input</strong>
+        <span>I work inside an organization's rules instead of around them, and make that part of the architecture.</span>
+      </li>
+      <li>
+        <strong>Humans hold the authority</strong>
+        <span>Automation earns more autonomy only after its accuracy has been measured.</span>
+      </li>
+      <li>
+        <strong>Verify, don't trust</strong>
+        <span>Real tests, audit trails, and watchdogs instead of a system's own report that it worked.</span>
+      </li>
+    </ul>
+
+    <!-- 1. FORGE -->
+    <details class="aip-project" open>
+      <summary>
+        <div class="aip-head">
+          <h3 class="aip-title">Forge: multi-agent AI software delivery pipeline</h3>
+          <span class="aip-status">Operational</span>
+        </div>
+        <p class="aip-summary">Four AI roles turn a plain-language request into planned, coded, tested, and committed software, with a human holding the scope.</p>
+        <ul class="aip-tags">
+          <li>Python</li><li>Local LLMs (Ollama)</li><li>State machines</li><li>pytest</li><li>JSON schema</li>
+        </ul>
+      </summary>
+      <div class="aip-body">
+        <dl>
+          <dt>The problem</dt>
+          <dd>Autonomous coding agents tend to drift. They quietly redefine scope, grade their own work generously, and cost money on every token.</dd>
+          <dt>What I built</dt>
+          <dd>
+            <ul>
+              <li>A Planner, Coder, Tester, and Shipper, each bound by a fixed contract so no agent can silently change another's job.</li>
+              <li>A Python state machine that retries implementation bugs within a capped budget but halts the whole pipeline on any specification change until a human approves.</li>
+              <li>Append-only audit logging of every phase transition, with state saved to disk so a halted run resumes exactly where it stopped, even days later in a new process.</li>
+            </ul>
+          </dd>
+          <dt>Design choices</dt>
+          <dd>
+            <ul>
+              <li>Moved inference to fully local models, removing per-token cost and API governance friction.</li>
+              <li>Added automated JSON repair and schema normalization to handle malformed model output.</li>
+              <li>The test step runs real pytest suites instead of trusting the model's self-assessment. I also found and fixed a defect where empty acceptance criteria passed automatically.</li>
+            </ul>
+          </dd>
+          <dt>Where it's used</dt>
+          <dd>It built the production code for other automations in this section, including an enterprise data write-back integration.</dd>
+        </dl>
+      </div>
+    </details>
+
+    <!-- 2. CRM WRITE-BACK -->
+    <details class="aip-project">
+      <summary>
+        <div class="aip-head">
+          <h3 class="aip-title">Governed CRM write-back automation</h3>
+          <span class="aip-status">Built and tested, rollout staged</span>
+        </div>
+        <p class="aip-summary">Automated bulk updates to an enterprise CRM where direct API access is deliberately blocked, using the sanctioned channel instead of a workaround.</p>
+        <ul class="aip-tags">
+          <li>Python</li><li>SQL</li><li>Cloud data warehouse</li><li>Headless bulk-load CLI</li><li>YAML config</li><li>pytest</li>
+        </ul>
+      </summary>
+      <div class="aip-body">
+        <dl>
+          <dt>The problem</dt>
+          <dd>A recurring manual review-and-update workflow, in an organization where API access was blocked on purpose. Browser automation or third-party connectors would have worked, and would have been the wrong call.</dd>
+          <dt>What I built</dt>
+          <dd>
+            <ul>
+              <li>A warehouse query that detects records meeting business trigger conditions and reads current state, so corrected records never fire twice.</li>
+              <li>SOP-compliant classification tagging, a formatted CSV, and a headless run of the organization's approved bulk-load tool, keyed on record ID so duplicates cannot be created.</li>
+            </ul>
+          </dd>
+          <dt>Design choices</dt>
+          <dd>
+            <ul>
+              <li>Every run parses the tool's success and error output, reports each failed row with its cause, and exits non-zero, so partial failures cannot pass silently between scheduled runs.</li>
+              <li>Sandbox-first rollout, a dedicated integration user for headless runs under single sign-on, and credentials kept out of code.</li>
+              <li>Automated tests with all external systems mocked.</li>
+            </ul>
+          </dd>
+        </dl>
+      </div>
+    </details>
+
+    <!-- 3. VISION QA -->
+    <details class="aip-project">
+      <summary>
+        <div class="aip-head">
+          <h3 class="aip-title">AI vision quality review for field installations</h3>
+          <span class="aip-status is-planned">In design</span>
+        </div>
+        <p class="aip-summary">AI pre-screening of technician photos and responses against written quality standards, with a human approving every verdict until the accuracy record justifies more.</p>
+        <ul class="aip-tags">
+          <li>Vision LLMs</li><li>Evaluation design</li><li>Human-in-the-loop</li><li>Python</li>
+        </ul>
+      </summary>
+      <div class="aip-body">
+        <dl>
+          <dt>The problem</dt>
+          <dd>Each installation work order includes required questions and photo evidence, and a quality representative reviews them by hand. That review sits between field submission and sign-off, and consistency depends on who does it.</dd>
+          <dt>Work so far</dt>
+          <dd>
+            <ul>
+              <li>Mapped where responses and photos land in the data platform.</li>
+              <li>Turned written quality standards into criteria a model can evaluate.</li>
+              <li>Assembled graded historical reviews as validation ground truth.</li>
+              <li>Evaluating hosted and local vision models against the organization's API governance constraints.</li>
+            </ul>
+          </dd>
+          <dt>Design choices</dt>
+          <dd>Staged autonomy. The AI flags issues and a human approves every order first. Clear passes graduate to auto-approval only after a measured accuracy track record, and every verdict traces to a written criterion.</dd>
+        </dl>
+      </div>
+    </details>
+
+    <!-- 4. OUTREACH -->
+    <details class="aip-project">
+      <summary>
+        <div class="aip-head">
+          <h3 class="aip-title">Autonomous customer activation outreach</h3>
+          <span class="aip-status">In production</span>
+        </div>
+        <p class="aip-summary">A daily pipeline that finds customers whose installed equipment is ready to switch on, fixes blocking data issues, and emails each one how to finish.</p>
+        <ul class="aip-tags">
+          <li>Python</li><li>SQL</li><li>Selenium (headless)</li><li>HTML email (SMTP)</li><li>Scheduled jobs</li>
+        </ul>
+      </summary>
+      <div class="aip-body">
+        <dl>
+          <dt>The problem</dt>
+          <dd>Daily manual lookups and one-by-one emails to customers who were approved to activate but hadn't yet.</dd>
+          <dt>What I built</dt>
+          <dd>
+            <ul>
+              <li>Three stages: a detection query, automated headless-browser remediation of upstream equipment-portal data issues (disabled settings, incorrect flags, missing dates), then a personalized how-to email.</li>
+              <li>Email templates chosen by equipment manufacturer, with photos of the customer's actual hardware.</li>
+              <li>It handles dozens of customers every day without anyone touching it.</li>
+            </ul>
+          </dd>
+          <dt>Reliability</dt>
+          <dd>
+            <ul>
+              <li>An independent watchdog job verifies the daily audit report was freshly written and alerts if customer emails failed. The system monitors itself.</li>
+              <li>A portal failure never blocks customer outreach, every external connection has a hard timeout, and failures capture a screenshot and page source for debugging.</li>
+              <li>Each run emails the team a per-customer record of actions taken and email status.</li>
+            </ul>
+          </dd>
+        </dl>
+      </div>
+    </details>
+
+    <!-- 5. SENTINEL -->
+    <details class="aip-project">
+      <summary>
+        <div class="aip-head">
+          <h3 class="aip-title">Sentinel: cadence compliance and missed follow-up detection</h3>
+          <span class="aip-status">In production, read-only</span>
+        </div>
+        <p class="aip-summary">Turns a team's outreach rules into a tested detection engine that flags missed follow-ups the same day.</p>
+        <ul class="aip-tags">
+          <li>Python</li><li>SQL</li><li>Rules engine</li><li>pytest</li>
+        </ul>
+      </summary>
+      <div class="aip-body">
+        <dl>
+          <dt>The problem</dt>
+          <dd>Missed customer follow-ups surfaced only when someone happened to audit by hand.</dd>
+          <dt>What I built</dt>
+          <dd>
+            <ul>
+              <li>The team's escalation clocks, stage conventions, and handoff templates, encoded as deterministic rules and documented in a single source-of-truth file.</li>
+              <li>A manager digest plus a personalized daily worklist for each specialist, with flag history across thousands of records so trends are visible.</li>
+            </ul>
+          </dd>
+          <dt>Design choices</dt>
+          <dd>
+            <ul>
+              <li>Detection logic is separate from input and output ("rows in, classified rows out"), so the rules are tested in isolation.</li>
+              <li>I piloted it on myself first and fixed silent scheduled-run failures before the team saw anything.</li>
+              <li>Read-only by design. It never writes back to the system of record.</li>
+            </ul>
+          </dd>
+        </dl>
+      </div>
+    </details>
+
+    <!-- 6. ACCESS AUDIT -->
+    <details class="aip-project">
+      <summary>
+        <div class="aip-head">
+          <h3 class="aip-title">Portal access compliance audit</h3>
+          <span class="aip-status">In production</span>
+        </div>
+        <p class="aip-summary">A weekly audit that verifies build partners hold the required portal access across hundreds of systems.</p>
+        <ul class="aip-tags">
+          <li>Python</li><li>Selenium</li><li>SQL</li><li>Scheduled reporting</li>
+        </ul>
+      </summary>
+      <div class="aip-body">
+        <dl>
+          <dt>The problem</dt>
+          <dd>Checking access system by system is impractical at this volume, so missing access showed up only when it blocked field work.</dd>
+          <dt>What I built</dt>
+          <dd>A weekly scheduled run that checks every system against contract data and emails an actionable CSV to the team.</dd>
+          <dt>Design choices</dt>
+          <dd>Guards against false negatives. A failed login aborts the run instead of continuing unauthenticated, and session-drop redirects are classified as errors rather than misreported as missing access.</dd>
+        </dl>
+      </div>
+    </details>
+
+    <!-- 7. CASE CREATION -->
+    <details class="aip-project">
+      <summary>
+        <div class="aip-head">
+          <h3 class="aip-title">Automated case creation and workload balancing</h3>
+          <span class="aip-status">In production</span>
+        </div>
+        <p class="aip-summary">Each morning, finds work that needs an on-site visit and distributes it evenly across the operations team.</p>
+        <ul class="aip-tags">
+          <li>Python</li><li>SQL</li><li>Round-robin assignment</li><li>CRM import automation</li>
+        </ul>
+      </summary>
+      <div class="aip-body">
+        <dl>
+          <dt>The problem</dt>
+          <dd>Operations staff triaged and assigned on-site casework by hand every morning.</dd>
+          <dt>What I built</dt>
+          <dd>A weekday job that identifies qualifying projects across three business segments, assigns them round-robin so workload stays even by construction, and emits a CRM-import-ready file.</dd>
+          <dt>Ownership</dt>
+          <dd>I took it over from the operations manager and documented known risks and open items in a handoff-quality README, so it runs as a maintained product rather than a script.</dd>
+        </dl>
+      </div>
+    </details>
+
+    <p class="aip-skills">
+      <strong>Across these projects:</strong> multi-agent system design, LLM orchestration, AI governance and
+      human-in-the-loop design, local model deployment, vision model evaluation, data pipelines, browser
+      automation, test automation, and workflow automation.
+    </p>
+
+    <p class="aip-cta"><a href="#contact">Need something like this built? Get in touch</a></p>
+
+  </div>
+</section>
       <!-- Main -->
       <div id="main">
         <!-- Featured Post -->
@@ -81,7 +443,7 @@
 
             <p>
               <strong>
-                Hey Everyone! Thanks for visiting, Are you interested in creating an application or a simple consultation?<br />
+                Hey Everyone! Thanks for visiting, Are you interested in creating an application or a AI Automation<br />
                 Don't hesitate! Let's get started with a simple conversation to explore your idea or vision....
               </strong>
             </p>
